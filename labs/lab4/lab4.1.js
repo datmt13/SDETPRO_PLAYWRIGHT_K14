@@ -62,12 +62,16 @@ function updateBalance(currentAccount) {
     if (!isInteger) {
       console.log("Please enter number type");
     } else {
-      if (currentAccount.balance < withdrawMoneyParseNumber) {
-        console.log("Invalid amount");
+      if (withdrawMoneyParseNumber < 0) {
+        console.log("The amount to withdraw must be greater than 0");
       } else {
-        currentAccount.balance -= withdrawMoneyParseNumber;
-        logAccountInfo(currentAccount);
-        withdrawFail = false;
+        if (currentAccount.balance < withdrawMoneyParseNumber) {
+          console.log("The amount to withdraw is greater than the balance");
+        } else {
+          currentAccount.balance -= withdrawMoneyParseNumber;
+          logAccountInfo(currentAccount);
+          withdrawFail = false;
+        }
       }
     }
   }
