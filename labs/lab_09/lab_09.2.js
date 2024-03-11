@@ -10,24 +10,25 @@ async function run() {
 }
 run();
 
-function sendRequestPosts() {
-  return fetch(urlPostData)
-    .then(function (response) {
-      return response.json();
-    })
-    .then(function (result) {
-      return result;
-    });
+async function sendRequestPosts() {
+  let res = await fetch(urlPostData)
+  return res.json();
 }
 
 function logInfoDataPost(posts) {
   let postsByUser = getPostsByUserId(posts);
   console.log(`all post of user id ${userId}`);
-  console.log(postsByUser);
+  console.log(printPostBody(postsByUser));
   console.log("=====================");
   console.log(`all post by user id ${userId} and post id ${postId}`);
   let postsById = getPostsById(postsByUser);
-  console.log(postsById);
+  console.log(printPostBody(postsById));
+}
+
+function printPostBody(posts) {
+  for(post of posts) {
+    console.log(`- post body content: ${post.body}`);
+  }
 }
 
 function getPostsByUserId(posts) {
